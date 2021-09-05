@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/Player_Ship.gd" type="Script" id=1]
+[ext_resource path="res://sprites/player_ship.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40, 19 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 27, 25 )
+
+[node name="Player_Ship" type="KinematicBody2D"]
+script = ExtResource( 1 )
+speed = 500
+
+[node name="gun_position" type="Position2D" parent="."]
+position = Vector2( 34.3354, -34.126 )
+rotation = 0.785398
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 0.785398
+texture = ExtResource( 2 )
+
+[node name="Collision_Back" type="CollisionShape2D" parent="."]
+position = Vector2( -21.0173, 21.0945 )
+rotation = 0.785398
+shape = SubResource( 1 )
+
+[node name="Collision_Front" type="CollisionShape2D" parent="."]
+position = Vector2( 10.7307, -8.61892 )
+rotation = 0.785398
+shape = SubResource( 2 )
