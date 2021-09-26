@@ -53,6 +53,7 @@ scale = Vector2( 0.05, 0.05 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 
@@ -68,7 +69,6 @@ autostart = true
 anims/explode = SubResource( 2 )
 
 [node name="Explosion" type="Sprite" parent="."]
-visible = false
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 hframes = 24

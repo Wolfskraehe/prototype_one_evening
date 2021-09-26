@@ -12,12 +12,12 @@ func spawn_enemy():
 		var e=enemy.instance()
 		add_child(e)
 		enemy_array.append(e)
-		e.global_position=Vector2(rand_range(100,500),rand_range(200,600))
+		e.global_position=Vector2(rand_range(1000,1000),rand_range(-1000,-1000))
 		respawn_timer=MAX_RESPAWN_TIMER
 		
 
 func _process(delta):
-	spawn_enemy()
+	#spawn_enemy()
 	respawn_timer-=delta
 	if !get_node('Enemy_Ship'):
 		enemy_array.clear()

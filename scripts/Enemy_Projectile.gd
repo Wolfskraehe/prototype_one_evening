@@ -29,7 +29,7 @@ func _physics_process(delta):
 func explode():
 	set_physics_process(false)
 	velocity=Vector2.ZERO
-	$AnimationPlayer.play("explode")
+	$AnimationPlayer.play("explode")	
 	yield($AnimationPlayer, "animation_finished")
 	queue_free()
 
