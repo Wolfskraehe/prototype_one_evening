@@ -4,8 +4,8 @@ export (int) var speed = 150
 const Projectile =preload("res://scenes/Projectile.tscn")
 
 var velocity = Vector2()
-var rotation_dir=0
-var rotation_speed = 200
+export var rotation_dir=0
+export var rotation_speed = 200
 export var friction = 0.01
 export var acceleration = 0.05
 
