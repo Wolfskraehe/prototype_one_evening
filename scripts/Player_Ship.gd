@@ -36,6 +36,12 @@ func get_newtonian_input(delta):
 	var move_dir=Vector2(1,0).rotated(rotation)
 	if Input.is_action_pressed('up'):
 		velocity=velocity.linear_interpolate(get_node("gun_position").global_transform.y,acceleration)
+	if Input.is_action_pressed("strafe_left"):
+		velocity=velocity.linear_interpolate(get_node("gun_position").global_transform.x,acceleration)
+	if Input.is_action_pressed("strafe_right"):
+		velocity=velocity.linear_interpolate(-get_node("gun_position").global_transform.x,acceleration)
+	if Input.is_action_pressed("down"):
+		velocity=velocity.linear_interpolate(-get_node("gun_position").global_transform.y,acceleration)
 	else:
 		velocity=velocity.linear_interpolate(Vector2(0,0),friction)
 
