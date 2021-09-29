@@ -15,8 +15,12 @@ _global_script_class_icons={
 [application]
 
 config/name="WeaponSwitchPrototype"
-run/main_scene="res://scenes/Instance.tscn"
+run/main_scene="res://scenes/Map_Screen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://scripts/Global.gd"
 
 [global]
 
