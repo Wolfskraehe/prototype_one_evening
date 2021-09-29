@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="SpacePrototype"
+config/name="!SpacePrototype"
 run/main_scene="res://scenes/Map_Screen.tscn"
 config/icon="res://icon.png"
 
