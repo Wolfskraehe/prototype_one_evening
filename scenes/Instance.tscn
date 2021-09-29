@@ -11,6 +11,7 @@ script = ExtResource( 5 )
 
 [node name="Player_Ship" parent="." instance=ExtResource( 1 )]
 position = Vector2( 528, 307 )
+mouse_sensitivity = 0.15
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 514.318, 298.431 )
@@ -26,16 +27,20 @@ script = ExtResource( 4 )
 motion_mirroring = Vector2( 4096, 4096 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 534.695, 303.571 )
+position = Vector2( -125.305, 511.571 )
 z_index = -1
 texture = ExtResource( 3 )
 
 [node name="Enemy_Ship" parent="." instance=ExtResource( 6 )]
 position = Vector2( 857.101, -193.046 )
+collision_layer = 5
+collision_mask = 7
 speed = 250.0
 weapon_projectile = false
 weapon_seeking = true
 
 [node name="Enemy_Ship2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1072.37, -152.683 )
+collision_layer = 5
+collision_mask = 7
 speed = 250.0
