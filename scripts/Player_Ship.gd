@@ -95,30 +95,31 @@ func shoot():
 
 #consume fire inputs:
 func fire_inputs():
-	if Input.is_action_just_released("fire"):
-		if _state == States.SHOOT_LEFT:
-			_state = States.IDLE
-		if _state == States.SHOOT_DOUBLE:
-			_state = States.SHOOT_RIGHT
-	if Input.is_action_just_released("secondary_fire"):
-		if _state == States.SHOOT_RIGHT:
-			_state = States.IDLE
-		elif _state == States.SHOOT_DOUBLE:
-			_state = States.SHOOT_LEFT
-			
+#	if Input.is_action_just_released("fire"):
+#		if _state == States.SHOOT_LEFT:
+#			_state = States.IDLE
+#		if _state == States.SHOOT_DOUBLE:
+#			_state = States.SHOOT_RIGHT
+#	if Input.is_action_just_released("secondary_fire"):
+#		if _state == States.SHOOT_RIGHT:
+#			_state = States.IDLE
+#		elif _state == States.SHOOT_DOUBLE:
+#			_state = States.SHOOT_LEFT
 	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire"):
 		#for catchin fram perfect double input - maybe not needed
 		_state = States.SHOOT_DOUBLE 
-	if Input.is_action_pressed("fire"):
-		if _state == States.IDLE:
+	elif Input.is_action_pressed("fire"):
+		#if _state == States.IDLE:
 			_state = States.SHOOT_LEFT
-		elif _state == States.SHOOT_RIGHT:
-			_state = States.SHOOT_DOUBLE
-	if Input.is_action_pressed("secondary_fire"):
-		if _state == States.IDLE:
+		#elif _state == States.SHOOT_RIGHT:
+			#_state = States.SHOOT_DOUBLE
+	elif Input.is_action_pressed("secondary_fire"):
+		#if _state == States.IDLE:
 			_state = States.SHOOT_RIGHT
-		elif _state == States.SHOOT_LEFT:
-			_state = States.SHOOT_DOUBLE
+		#elif _state == States.SHOOT_LEFT:
+			#_state = States.SHOOT_DOUBLE
+	else:
+			_state = States.IDLE
 
 func _physics_process(delta):
 	fire_inputs()	
