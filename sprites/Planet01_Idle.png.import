@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/space_bg.png-aab996e31165d5b523838a8e6a84cfb4.stex"
+path="res://.import/Planet01_Idle.png-42f99eb7b28c10e6cf0cf78d8e774923.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/space_bg.png"
-dest_files=[ "res://.import/space_bg.png-aab996e31165d5b523838a8e6a84cfb4.stex" ]
+source_file="res://sprites/Planet01_Idle.png"
+dest_files=[ "res://.import/Planet01_Idle.png-42f99eb7b28c10e6cf0cf78d8e774923.stex" ]
 
 [params]
 

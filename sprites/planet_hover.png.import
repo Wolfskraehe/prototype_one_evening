@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bg5.jpg-66b4d47982fcf354b20401e814005665.stex"
+path="res://.import/planet_hover.png-9c4495924a74d4073280e73743d28c6a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/bg5.jpg"
-dest_files=[ "res://.import/bg5.jpg-66b4d47982fcf354b20401e814005665.stex" ]
+source_file="res://sprites/planet_hover.png"
+dest_files=[ "res://.import/planet_hover.png-9c4495924a74d4073280e73743d28c6a.stex" ]
 
 [params]
 

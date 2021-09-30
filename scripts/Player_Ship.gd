@@ -19,10 +19,14 @@ var velocity = Vector2()
 const MAX_FIRE_DELAY=0.3
 var fire_delay=0.0
 
+#placeholder variable for loudout change via map screen
+var _loadout=""
+
 func _ready():
 	#make mouse invisible and confine to window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) 
 	add_to_group("player")
+	_loadout=Global.current_player_loadout
 			
 
 #pseudo-newtonian movement with accleration and slow deccelration, relative movement
@@ -43,7 +47,7 @@ func get_newtonian_input(delta):
 	else:
 		velocity=velocity.linear_interpolate(Vector2(0,0),friction)
 
-#verion with fixed movement	
+#version with fixed movement	
 func get_newtonian_input_fixed(delta):
 	if Input.is_action_pressed("right"):
 		rotation_degrees+=rotation_speed*delta
@@ -109,6 +113,7 @@ func fire_inputs():
 		#for catchin fram perfect double input - maybe not needed
 		_state = States.SHOOT_DOUBLE 
 	elif Input.is_action_pressed("fire"):
+			print(_loadout) #for testing purposes
 		#if _state == States.IDLE:
 			_state = States.SHOOT_LEFT
 		#elif _state == States.SHOOT_RIGHT:

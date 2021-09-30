@@ -3,6 +3,7 @@ extends Node
 #This script manages all scene transition on a global level and can store global variables and states
 #needs to be autoloaded
 var current_scene = null
+var current_player_loadout=""
 
 func _ready():
 	var root = get_tree().get_root()
