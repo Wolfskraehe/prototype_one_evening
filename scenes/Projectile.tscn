@@ -19,3 +19,7 @@ texture = ExtResource( 2 )
 visible = false
 position = Vector2( 0, -0.891903 )
 shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
