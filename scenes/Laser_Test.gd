@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	$Line2D.points[1] = cast_point
 	$BeamParticles.position = cast_point * 0.5
 	$BeamParticles.process_material.emission_box_extents.x = cast_point.length() * 0.5
-	print (cast_point.length())
+	
 	
 func set_is_casting(cast: bool) -> void:
 	is_casting = cast
