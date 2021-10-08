@@ -1,0 +1,122 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/Laser_Test.gd" type="Script" id=1]
+[ext_resource path="res://resources/particles/circle_glow_blue.png" type="Texture" id=2]
+
+[sub_resource type="Environment" id=13]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.5
+glow_strength = 0.72
+glow_blend_mode = 0
+glow_hdr_luminance_cap = 30.9
+glow_bicubic_upscale = true
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19.2846, 286.414 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.995951 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.492593, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 257.93
+initial_velocity_random = 0.21
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 430.34
+initial_velocity_random = 0.21
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0.51417, 1 )
+colors = PoolColorArray( 6, 6, 6, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.492593, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 96.56
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -86.89
+tangential_accel = 100.0
+scale = 0.4
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 10 )
+
+[node name="RayCast2D" type="RayCast2D"]
+enabled = true
+cast_to = Vector2( 1000, 0 )
+script = ExtResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 13 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 100, 0 )
+default_color = Color( 0.5, 3, 6, 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 927.715, -12.5862 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="CastingParticlesOrigin" type="Particles2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+lifetime = 0.3
+process_material = SubResource( 6 )
+texture = ExtResource( 2 )
+
+[node name="CastingParticlesHit" type="Particles2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+lifetime = 0.3
+process_material = SubResource( 7 )
+texture = ExtResource( 2 )
+
+[node name="BeamParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 1.3
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true

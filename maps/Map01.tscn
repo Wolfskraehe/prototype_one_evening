@@ -17,7 +17,6 @@ mouse_sensitivity = 0.15
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 514.318, 298.431 )
 current = true
-zoom = Vector2( 2.2, 2.2 )
 smoothing_enabled = true
 smoothing_speed = 2.0
 script = ExtResource( 4 )
