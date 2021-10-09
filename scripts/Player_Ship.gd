@@ -1,11 +1,6 @@
 extends KinematicBody2D
 
 export (int) var speed = 150
-const Projectile =preload("res://scenes/Projectile.tscn")
-const ProjectileRight =preload("res://scenes/Projectile_right.tscn")
-const ProjectileDouble =preload("res://scenes/Projectile_double_big.tscn")
-
-enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
 
 export var rotation_dir : float=0
 export var rotation_speed : float = 200
@@ -14,20 +9,17 @@ export var acceleration : float = 0.05
 export var mouse_sensitivity := 0.05
 export var relative_controls: bool =true
 
-var _state : int = States.IDLE
 var velocity = Vector2()
-const MAX_FIRE_DELAY=0.3
-var fire_delay=0.0
 
 #placeholder variable for loudout change via map screen
 var _loadout=""
 
+
 func _ready():
 	#make mouse invisible and confine to window
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) 
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
 	_loadout=Global.current_player_loadout
-			
 
 #pseudo-newtonian movement with accleration and slow deccelration, relative movement
 func get_newtonian_input(delta):
@@ -73,6 +65,35 @@ func _input(event: InputEvent) -> void:
 	var mouse_motion = event as InputEventMouseMotion
 	if mouse_motion:
 		rotation_degrees += mouse_motion.relative.x * mouse_sensitivity
+
+func _physics_process(delta):
+	WeaponController.fire_inputs()
+	WeaponController.shoot()
+	
+	if relative_controls:
+		get_newtonian_input(delta)
+	else:
+		get_newtonian_input_fixed(delta)
+		
+	#fire_delay-=delta
+	global_position-=move_and_slide(velocity*speed*delta)
+
+
+
+
+	
+"""
+Old shooting mechanic for backup purposes
+
+Weapons were moved to a global Weapon_Controller script
+const Projectile =preload("res://scenes/Projectile.tscn")
+const ProjectileRight =preload("res://scenes/Projectile_right.tscn")
+const ProjectileDouble =preload("res://scenes/Projectile_double_big.tscn")
+const MAX_FIRE_DELAY=0.3
+var fire_delay=0.0
+enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
+var _state : int = States.IDLE
+enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
 	
 func shoot():
 	match _state:
@@ -108,19 +129,6 @@ func fire_inputs():
 		_state = States.SHOOT_RIGHT
 	else:
 		_state = States.IDLE
-
-func _physics_process(delta):
-	fire_inputs()	
-	
-	if relative_controls:
-		get_newtonian_input(delta)
-	else:
-		get_newtonian_input_fixed(delta)
-		
-	shoot()
-	fire_delay-=delta
-	global_position-=move_and_slide(velocity*speed*delta)
-	
-	
+"""
 	
 	
