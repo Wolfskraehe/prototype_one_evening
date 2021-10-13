@@ -7,7 +7,7 @@ func _ready():
 	opt_button=get_node("Loadout/OptionButton")
 	opt_button.add_item("First Weapon Loadout")
 	opt_button.add_item("Second Weapon Loadout")
-	opt_button.select(0)
+	opt_button.select(-1)
 	
 func _on_Button2_pressed():
 	Global.goto_scene("res://maps/Map01.tscn")
@@ -22,8 +22,18 @@ func _on_LoadoutButton_pressed():
 
 
 func _on_OptionButton_item_selected(index):
-	Global.current_player_loadout=opt_button.get_item_text(index)
+	
+	#for testing
+	if index==0:
+		PlayerLoadout._set_default()
+	else:
+		PlayerLoadout._set_alternate()
 
 
 func _on_StartButton_pressed():
+	
+	#if nothing selected in loadout
+	if opt_button.selected==0:
+		PlayerLoadout._set_default()
+		
 	Global.goto_scene("res://maps/Map01.tscn")

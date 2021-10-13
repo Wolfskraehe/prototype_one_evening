@@ -22,6 +22,8 @@ config/icon="res://icon.png"
 
 Global="*res://scripts/Global.gd"
 WeaponController="*res://scripts/Weapon_Controller.gd"
+PlayerLoadout="*res://scripts/PlayerLoadout.gd"
+Weapons="*res://scripts/Weapons.gd"
 
 [display]
 

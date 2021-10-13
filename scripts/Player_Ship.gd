@@ -11,15 +11,10 @@ export var relative_controls: bool =true
 
 var velocity = Vector2()
 
-#placeholder variable for loudout change via map screen
-var _loadout=""
-
-
 func _ready():
 	#make mouse invisible and confine to window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
-	_loadout=Global.current_player_loadout
 
 #pseudo-newtonian movement with accleration and slow deccelration, relative movement
 func get_newtonian_input(delta):
@@ -61,7 +56,6 @@ func get_newtonian_input_fixed(delta):
 #get input for rotation via mouse
 func _input(event: InputEvent) -> void:
 	
-			
 	var mouse_motion = event as InputEventMouseMotion
 	if mouse_motion:
 		rotation_degrees += mouse_motion.relative.x * mouse_sensitivity
