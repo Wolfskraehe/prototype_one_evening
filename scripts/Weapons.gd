@@ -53,8 +53,6 @@ func _projectile_left():
 func _projectile_right(is_shooting):
 	
 	get_tree().get_root().add_child(gun_right)
-#	gun_right.transform = get_tree().get_root().get_node("Instance/Player_Ship/gun_position").global_transform
-#	gun_right.rotation_degrees -= 90
 	if gun_right_active:
 		gun_right.shoot(is_shooting)
 
