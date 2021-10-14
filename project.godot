@@ -25,11 +25,6 @@ WeaponController="*res://scripts/Weapon_Controller.gd"
 PlayerLoadout="*res://scripts/PlayerLoadout.gd"
 Weapons="*res://scripts/Weapons.gd"
 
-[display]
-
-window/size/width=1920
-window/size/height=1080
-
 [global]
 
 collision=false

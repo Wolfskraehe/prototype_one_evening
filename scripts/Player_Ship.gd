@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
+var _state : int = States.IDLE
+
+signal state_idle
+
 export (int) var speed = 150
 
 export var rotation_dir : float=0
@@ -59,10 +64,25 @@ func _input(event: InputEvent) -> void:
 	var mouse_motion = event as InputEventMouseMotion
 	if mouse_motion:
 		rotation_degrees += mouse_motion.relative.x * mouse_sensitivity
+	
+		
+		
+func fire_inputs():
+	if Input.is_action_just_released("secondary_fire"):
+		emit_signal("state_idle")
+	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire"):
+		_state = States.SHOOT_DOUBLE 
+	elif Input.is_action_pressed("fire"):
+		_state = States.SHOOT_LEFT
+	elif Input.is_action_pressed("secondary_fire"):
+		_state = States.SHOOT_RIGHT
+	else:
+		_state = States.IDLE
+		
 
 func _physics_process(delta):
-	WeaponController.fire_inputs()
-	WeaponController.shoot()
+	fire_inputs()
+	WeaponController.shoot(_state)
 	
 	if relative_controls:
 		get_newtonian_input(delta)

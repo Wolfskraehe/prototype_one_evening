@@ -18,5 +18,6 @@ position = Vector2( 0, -0.891903 )
 shape = SubResource( 1 )
 
 [node name="Lifetime" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.172
+one_shot = true
 autostart = true

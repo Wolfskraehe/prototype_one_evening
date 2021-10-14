@@ -14,22 +14,28 @@ var _right_weapon=""
 var _double_weapon=""
 
 func _get_weapons():
+	PlayerLoadout._set_default()
 	_left_weapon=PlayerLoadout.left_weapon
 	_right_weapon=PlayerLoadout.right_weapon
 	_double_weapon=PlayerLoadout.double_weapon
 
-func shoot():
+func shoot(state):
 	_get_weapons()
-	match _state:
-		States.SHOOT_LEFT:
+	#print("passedState:" + state as String)
+	#print("waitingState" + _state as String)
+	match state:
+		1:
+			
 			if fire_delay<=0.0:
 				Weapons.fire_weapon(_left_weapon) #Calls global Weapon Script
+				
 				fire_delay=MAX_FIRE_DELAY
-		States.SHOOT_RIGHT:
+				
+		2:
 			if fire_delay<=0.0:
 				Weapons.fire_weapon(_right_weapon)
 				fire_delay=MAX_FIRE_DELAY
-		States.SHOOT_DOUBLE:
+		3:
 			if fire_delay<=0.0:
 				Weapons.fire_weapon(_double_weapon)
 				fire_delay=MAX_FIRE_DELAY

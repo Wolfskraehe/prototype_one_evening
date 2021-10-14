@@ -13,11 +13,12 @@ func start(_transform, _target):
 
 func _ready():
 	connect("body_entered", self, "_on_Projectile_body_entered")
+	$Lifetime.connect("timeout", self, "_on_timeout")
 
 func _physics_process(delta):
 	position -= transform.y * speed * delta
 
-func _on_Lifetime_timeout():
+func _on_timeout():
 	queue_free()
 	
 
