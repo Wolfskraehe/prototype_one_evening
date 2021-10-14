@@ -25,33 +25,27 @@ func shoot(state):
 	#print("waitingState" + _state as String)
 	match state:
 		1:
-			
-			if fire_delay<=0.0:
-				Weapons.fire_weapon(_left_weapon) #Calls global Weapon Script
-				
-				fire_delay=MAX_FIRE_DELAY
-				
+			Weapons.fire_weapon(_left_weapon) #Calls global Weapon Script
 		2:
-			if fire_delay<=0.0:
-				Weapons.fire_weapon(_right_weapon)
-				fire_delay=MAX_FIRE_DELAY
+			Weapons.fire_weapon(_right_weapon)
+
 		3:
 			if fire_delay<=0.0:
 				Weapons.fire_weapon(_double_weapon)
 				fire_delay=MAX_FIRE_DELAY
-		States.IDLE:
+		0:
 			return
 
 #consume fire inputs:
-func fire_inputs():
-	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire"):
-		_state = States.SHOOT_DOUBLE 
-	elif Input.is_action_pressed("fire"):
-		_state = States.SHOOT_LEFT
-	elif Input.is_action_pressed("secondary_fire"):
-		_state = States.SHOOT_RIGHT
-	else:
-		_state = States.IDLE
+#func fire_inputs():
+#	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire"):
+#		_state = States.SHOOT_DOUBLE 
+#	elif Input.is_action_pressed("fire"):
+#		_state = States.SHOOT_LEFT
+#	elif Input.is_action_pressed("secondary_fire"):
+#		_state = States.SHOOT_RIGHT
+#	else:
+#		_state = States.IDLE
 		
 func _physics_process(delta):
 	fire_delay-=delta

@@ -4,6 +4,7 @@ enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
 var _state : int = States.IDLE
 
 signal state_idle
+signal state_double
 
 export (int) var speed = 150
 
@@ -68,13 +69,14 @@ func _input(event: InputEvent) -> void:
 		
 		
 func fire_inputs():
-	if Input.is_action_just_released("secondary_fire"):
+	if Input.is_action_just_released("secondary_fire") or Input.is_action_just_released("fire"):
 		emit_signal("state_idle")
 	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire"):
+		emit_signal("state_idle")
 		_state = States.SHOOT_DOUBLE 
 	elif Input.is_action_pressed("fire"):
 		_state = States.SHOOT_LEFT
-	elif Input.is_action_pressed("secondary_fire"):
+	elif Input.is_action_just_pressed("secondary_fire"):
 		_state = States.SHOOT_RIGHT
 	else:
 		_state = States.IDLE
