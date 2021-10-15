@@ -11,6 +11,7 @@ const Laser =preload("res://scenes/Sustained_Gun.tscn")
 	
 var gun_left
 var gun_right
+var false_flag = false
 		
 		
 func _ready() -> void:
@@ -46,9 +47,13 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_state_idle():
-
-	gun_right.shoot(false)
-	gun_left.shoot(false)
+	
+	
+	if false_flag == false:
+		
+		false_flag = true
+		gun_right.shoot(false)
+		gun_left.shoot(false)
 	
 #Right now harcoded to the three scenes Projectile, ProjectileRight and ProjectileDouble
 func _projectile_left():
@@ -56,10 +61,13 @@ func _projectile_left():
 #	get_tree().get_root().move_child(get_node("Instance/Player_Ship/gun_left"),get_tree().get_node_count())
 #	#var GunLeft = Projectile.instance()
 #	gun_left.transform = get_tree().get_root().get_node("Instance/Player_Ship/gun_position").global_transform
+	false_flag = false
 	gun_left.shoot(true)
+	
 	
 
 func _projectile_right():
+	false_flag = false
 	gun_right.shoot(true)
 
 func _projectile_double():

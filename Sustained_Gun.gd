@@ -4,8 +4,7 @@ const Laser =preload("res://scenes/Laser_Test.tscn")
 
 var laser = Laser.instance()
 
-signal fire_laser
-signal shutdown_laser
+
 
 func _ready() -> void:
 	get_tree().get_root().call_deferred("add_child", laser)

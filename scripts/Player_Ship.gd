@@ -17,6 +17,10 @@ export var relative_controls: bool =true
 
 var velocity = Vector2()
 
+var left_flag = false
+var right_flag = false
+var double_flag = false
+
 func _ready():
 	#make mouse invisible and confine to window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -66,25 +70,107 @@ func _input(event: InputEvent) -> void:
 	if mouse_motion:
 		rotation_degrees += mouse_motion.relative.x * mouse_sensitivity
 	
+	
+#func _unhandled_input(event: InputEvent) -> void:
+#
+#	if event is InputEventMouseButton:
+#		if event.is_action_pressed("secondary_fire"):
+#			right_flag = true
+#			if left_flag:
+#				print("double")
+#			else:
+#				print("right")
+#		elif event.is_action_pressed("fire"):
+#			left_flag = true
+#			if right_flag:
+#				print("double")
+#			else:
+#				print("right")
+#		elif event.is_action_released("strafe_left")
+#		elif event.is_action_released("strafe_left")
+			
+const FIRE : Dictionary = {
+	NONE = 0,
+	LEFT = 1,
+	RIGHT = 2,
+	BOTH = 3
+}
+
+var fire : int = FIRE.NONE
+var last_fire : int = FIRE.NONE
+
+
+func _process(delta: float) -> void:
+	fire_inputs()
+
+
+func fire_inputs() -> void:
+	var new_fire = FIRE.NONE
+	if Input.is_action_pressed("fire"):
+		new_fire |= FIRE.LEFT
+	if Input.is_action_pressed("secondary_fire"):
+		new_fire |= FIRE.RIGHT
+	
+	if new_fire == last_fire:
+		fire = FIRE.NONE
+		return
+	
+	last_fire = new_fire
+	fire = new_fire
+	
+	test_fire_inputs()
+
+
+func test_fire_inputs() -> void:
+	match fire:
+		FIRE.NONE:
+			print("none")
+		FIRE.LEFT:
+			print("left")
+		FIRE.RIGHT:
+			print("right")
+		FIRE.BOTH:
+			print("both")
+		_:
+			prints("error (%s)" % fire)
 		
-		
-func fire_inputs():
-	if Input.is_action_just_released("secondary_fire") or Input.is_action_just_released("fire"):
+"""func fire_inputs():
+	if Input.is_action_just_released("secondary_fire"):
 		emit_signal("state_idle")
-	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire"):
+		right_flag = false
+		if double_flag:
+			double_flag = false
+			left_flag = false
+	elif Input.is_action_just_released("fire"):
 		emit_signal("state_idle")
-		_state = States.SHOOT_DOUBLE 
-	elif Input.is_action_pressed("fire"):
+		left_flag = false
+		if double_flag:
+			double_flag = false
+			right_flag = false
+	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire") and double_flag == false:
+		left_flag = true
+		right_flag = true
+		double_flag = true
+		print("double")
+		emit_signal("state_idle")
+		_state = States.SHOOT_DOUBLE
+	elif Input.is_action_pressed("fire") and left_flag == false:
+		print("fire")
+		left_flag = true
+		double_flag = false
 		_state = States.SHOOT_LEFT
-	elif Input.is_action_just_pressed("secondary_fire"):
+	elif Input.is_action_pressed("secondary_fire") and right_flag == false:
+		right_flag = true
+		double_flag = false
+		print("secondary fire")
 		_state = States.SHOOT_RIGHT
 	else:
+		#emit_signal("state_idle")
 		_state = States.IDLE
-		
+"""
 
 func _physics_process(delta):
-	fire_inputs()
-	WeaponController.shoot(_state)
+	#WeaponController.shoot(_state)
 	
 	if relative_controls:
 		get_newtonian_input(delta)
