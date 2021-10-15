@@ -7,12 +7,9 @@ const ProjectileRight =preload("res://scenes/Projectile_right.tscn")
 const ProjectileDouble =preload("res://scenes/Projectile_double_big.tscn")
 const Laser =preload("res://scenes/Sustained_Gun.tscn")
 
-
 	
 var gun_left
 var gun_right
-#stops off signal from triggering off animation if already off
-var false_flag = true 
 		
 		
 func _ready() -> void:
@@ -62,32 +59,20 @@ func _physics_process(delta: float) -> void:
 func _on_stop_fire_double():
 		return
 	
-		#gun_left.shoot(false)
-	#stops shutdown signal from triggering off animation if already off
-	#if not false_flag: 
-		#false_flag = true
-		#gun_right.shoot(false)
-	
-	
 func _on_stop_fire_left():
-	
-
 		gun_left.shoot(false)
+		
 func _on_stop_fire_right():
-	#if not false_flag:
-		false_flag = true
 		gun_right.shoot(false)
+		
 #Right now harcoded to the three scenes Projectile, ProjectileRight and ProjectileDouble
 func _projectile_left():
-
 	gun_left.shoot(true)
 
 func _projectile_right():
-	false_flag = false
 	gun_right.shoot(true)
 
 func _projectile_double():
-	
 	var p = ProjectileDouble.instance()
 	get_tree().get_root().add_child(p)
 	p.transform = get_tree().get_root().get_node("Instance/Player_Ship/gun_position").global_transform
