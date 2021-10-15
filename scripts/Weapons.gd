@@ -11,7 +11,8 @@ const Laser =preload("res://scenes/Sustained_Gun.tscn")
 	
 var gun_left
 var gun_right
-var false_flag = false
+#stops off signal from triggering off animation if already off
+var false_flag = true 
 		
 		
 func _ready() -> void:
@@ -38,33 +39,48 @@ func fire_weapon(weapon):
 
 func _physics_process(delta: float) -> void:
 	var player = get_tree().get_root().get_node_or_null("Instance/Player_Ship")
-	#if get_tree().get_root().get_node_or_null("Instance/Player_Ship"):
-		#print(get_tree().get_root().get_node_or_null("Instance/Player_Ship")._state)
+	
 	if player:
-		if not player.is_connected("state_idle", self, "_on_state_idle"):
-			player.connect("state_idle", self, "_on_state_idle")
+#		if not player.is_connected("state_idle", self, "_on_state_idle"):
+#			player.connect("state_idle", self, "_on_state_idle")
+		if not player.is_connected("stop_fire_double", self, "_on_stop_fire_double"):
+			player.connect("stop_fire_double", self, "_on_stop_fire_double")
+		if not player.is_connected("stop_fire_left", self, "_on_stop_fire_left"):
+			player.connect("stop_fire_left", self, "_on_stop_fire_left")
+		if not player.is_connected("stop_fire_right", self, "_on_stop_fire_right"):
+			player.connect("stop_fire_right", self, "_on_stop_fire_right")
 		
 	
 
-func _on_state_idle():
-	
-	
-	if false_flag == false:
+#func _on_state_idle():
+#	if false_flag == false:
+#
+#		false_flag = true
+#		#gun_right.shoot(false)
+#		#gun_left.shoot(false)
 		
+func _on_stop_fire_double():
+		return
+	
+		#gun_left.shoot(false)
+	#stops shutdown signal from triggering off animation if already off
+	#if not false_flag: 
+		#false_flag = true
+		#gun_right.shoot(false)
+	
+	
+func _on_stop_fire_left():
+	
+
+		gun_left.shoot(false)
+func _on_stop_fire_right():
+	#if not false_flag:
 		false_flag = true
 		gun_right.shoot(false)
-		gun_left.shoot(false)
-	
 #Right now harcoded to the three scenes Projectile, ProjectileRight and ProjectileDouble
 func _projectile_left():
-#	gun_left = Projectile.instance()
-#	get_tree().get_root().move_child(get_node("Instance/Player_Ship/gun_left"),get_tree().get_node_count())
-#	#var GunLeft = Projectile.instance()
-#	gun_left.transform = get_tree().get_root().get_node("Instance/Player_Ship/gun_position").global_transform
-	false_flag = false
+
 	gun_left.shoot(true)
-	
-	
 
 func _projectile_right():
 	false_flag = false

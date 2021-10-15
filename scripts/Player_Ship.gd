@@ -2,9 +2,13 @@ extends KinematicBody2D
 
 enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
 var _state : int = States.IDLE
+var _previous_state : int = States.IDLE
 
 signal state_idle
 signal state_double
+signal stop_fire_left
+signal stop_fire_right
+signal stop_fire_double
 
 export (int) var speed = 150
 
@@ -102,9 +106,10 @@ var last_fire : int = FIRE.NONE
 
 func _process(delta: float) -> void:
 	fire_inputs()
-
+	
 
 func fire_inputs() -> void:
+	# credit to Whitehshampoo of godot engine discord
 	var new_fire = FIRE.NONE
 	if Input.is_action_pressed("fire"):
 		new_fire |= FIRE.LEFT
@@ -122,17 +127,34 @@ func fire_inputs() -> void:
 
 
 func test_fire_inputs() -> void:
+	_previous_state = _state
 	match fire:
 		FIRE.NONE:
+			emit_signal("stop_fire_double")
+			emit_signal("stop_fire_right")
+			emit_signal("stop_fire_left")
+			_state = States.IDLE
 			print("none")
 		FIRE.LEFT:
+			emit_signal("stop_fire_double")
+			#emit_signal("stop_fire_right")
+			_state = States.SHOOT_LEFT
 			print("left")
 		FIRE.RIGHT:
+			_state = States.SHOOT_RIGHT
+			emit_signal("stop_fire_double")
+			#emit_signal("stop_fire_left")
 			print("right")
 		FIRE.BOTH:
+			_state = States.SHOOT_DOUBLE
+			if _previous_state == States.SHOOT_RIGHT:
+				emit_signal("stop_fire_right")
+			if  _previous_state == States.SHOOT_LEFT:
+				emit_signal("stop_fire_left")
 			print("both")
 		_:
 			prints("error (%s)" % fire)
+	WeaponController.shoot(_state)
 		
 """func fire_inputs():
 	if Input.is_action_just_released("secondary_fire"):
@@ -170,6 +192,7 @@ func test_fire_inputs() -> void:
 """
 
 func _physics_process(delta):
+	
 	#WeaponController.shoot(_state)
 	
 	if relative_controls:
