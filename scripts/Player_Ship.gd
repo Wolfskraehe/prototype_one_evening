@@ -4,6 +4,9 @@ enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
 var _state : int = States.IDLE
 var _previous_state : int = States.IDLE
 
+const MIN_ZOOM_FACTOR=Vector2(0.7,0.7)
+const MAX_ZOOM_FACTOR=Vector2(3,3)
+
 signal state_idle
 signal state_double
 signal stop_fire_left
@@ -25,10 +28,13 @@ var left_flag = false
 var right_flag = false
 var double_flag = false
 
+var camera=null
+
 func _ready():
 	#make mouse invisible and confine to window
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
+	camera=get_parent().get_node("Camera2D")
 
 #pseudo-newtonian movement with accleration and slow deccelration, relative movement
 func get_newtonian_input(delta):
@@ -190,6 +196,15 @@ func test_fire_inputs() -> void:
 		#emit_signal("state_idle")
 		_state = States.IDLE
 """
+
+func _unhandled_input(event: InputEvent) -> void:
+	var zoom_factor=camera.get_zoom()
+	if event.is_action("scroll_down") and zoom_factor <= MAX_ZOOM_FACTOR:
+		zoom_factor+=Vector2(0.1,0.1)
+		camera.set_zoom(zoom_factor)
+	if event.is_action("scroll_up") and zoom_factor >= MIN_ZOOM_FACTOR:
+		zoom_factor-=Vector2(0.1,0.1)
+		camera.set_zoom(zoom_factor)
 
 func _physics_process(delta):
 	
