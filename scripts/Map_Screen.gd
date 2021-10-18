@@ -4,7 +4,7 @@ var opt_button=null
 #Must have Global.gd autoloaded to function
 
 func _ready():
-	opt_button=get_node("Loadout/OptionButton")
+	opt_button=$Control/Loadout/OptionButton
 	opt_button.add_item("First Weapon Loadout")
 	opt_button.add_item("Second Weapon Loadout")
 	opt_button.select(-1)

@@ -10,85 +10,25 @@
 script = ExtResource( 5 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -18.6879
+margin_top = -15.7006
+margin_right = 21.3121
+margin_bottom = 24.2994
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( 942.868, 520.822 )
-scale = Vector2( 1.12721, 1.11545 )
-texture = ExtResource( 1 )
-
-[node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 768.74
-margin_top = 480.0
-margin_right = 1068.74
-margin_bottom = 780.0
-hint_tooltip = "Planet 01 - Mission 01"
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
-texture_hover = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MapDescription" type="PopupDialog" parent="."]
+[node name="Loadout" type="PopupDialog" parent="Control"]
 visible = true
-margin_left = 1129.0
-margin_top = 147.0
-margin_right = 1602.0
-margin_bottom = 646.0
+margin_left = 893.925
+margin_top = 163.421
+margin_right = 1135.92
+margin_bottom = 405.421
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="Button" parent="MapDescription"]
-margin_left = 344.515
-margin_top = 381.362
-margin_right = 439.515
-margin_bottom = 401.362
-text = "Start Mission"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="MapDescription"]
-margin_left = 9.0
-margin_top = 13.3182
-margin_right = 457.0
-margin_bottom = 38.3182
-text = "Mission Description"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LoadoutButton" type="Button" parent="MapDescription"]
-anchor_bottom = 0.019
-margin_left = 348.843
-margin_top = 323.792
-margin_right = 439.843
-margin_bottom = 334.311
-text = "Loadout"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Loadout" type="PopupDialog" parent="."]
-visible = true
-margin_left = 858.87
-margin_top = 155.586
-margin_right = 1100.87
-margin_bottom = 397.586
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Loadout"]
+[node name="Label" type="Label" parent="Control/Loadout"]
 margin_left = -2.24396
 margin_top = 8.89917
 margin_right = 241.756
@@ -101,7 +41,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" type="OptionButton" parent="Loadout"]
+[node name="OptionButton" type="OptionButton" parent="Control/Loadout"]
 margin_left = 34.5564
 margin_top = 77.0294
 margin_right = 213.556
@@ -112,7 +52,70 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
-[connection signal="pressed" from="MapDescription/StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="pressed" from="MapDescription/LoadoutButton" to="." method="_on_LoadoutButton_pressed"]
-[connection signal="item_selected" from="Loadout/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[node name="TextureButton" type="TextureButton" parent="Control"]
+margin_left = 803.795
+margin_top = 487.835
+margin_right = 1103.79
+margin_bottom = 787.835
+hint_tooltip = "Planet 01 - Mission 01"
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="Control"]
+position = Vector2( 983.552, 506.533 )
+scale = Vector2( 1.12721, 1.11545 )
+z_index = -1
+texture = ExtResource( 1 )
+
+[node name="MapDescription" type="PopupDialog" parent="Control"]
+visible = true
+margin_left = 1164.05
+margin_top = 154.835
+margin_right = 1637.05
+margin_bottom = 653.835
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="Control/MapDescription"]
+margin_left = 344.515
+margin_top = 381.362
+margin_right = 439.515
+margin_bottom = 401.362
+text = "Start Mission"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/MapDescription"]
+margin_left = 9.0
+margin_top = 13.3182
+margin_right = 457.0
+margin_bottom = 38.3182
+text = "Mission Description"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadoutButton" type="Button" parent="Control/MapDescription"]
+anchor_bottom = 0.019
+margin_left = 348.843
+margin_top = 323.792
+margin_right = 439.843
+margin_bottom = 334.311
+text = "Loadout"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="Control/Loadout/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="Control/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Control/MapDescription/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Control/MapDescription/LoadoutButton" to="." method="_on_LoadoutButton_pressed"]
