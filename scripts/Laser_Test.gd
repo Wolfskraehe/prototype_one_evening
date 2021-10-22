@@ -5,16 +5,11 @@ var is_casting := false setget set_is_casting
 func _ready() -> void:
 	set_physics_process(false)
 	$Line2D.points[1] = Vector2.ZERO
-#func _unhandled_input(event: InputEvent) -> void:
-#	if event is InputEventMouseButton:
-#		self.is_casting = event.pressed
 
 func shoot(is_shooting):
 	self.is_casting = is_shooting
-	
-	
-func _physics_process(delta: float) -> void:
-	
+		
+func _physics_process(_delta: float) -> void:
 	
 	var cast_point := cast_to
 	force_raycast_update()
@@ -28,7 +23,6 @@ func _physics_process(delta: float) -> void:
 		if body.is_in_group("enemy"):
 			body.destroy()
 
-	
 	$Line2D.points[1] = cast_point
 	$BeamParticles.position = cast_point * 0.5
 	$BeamParticles.process_material.emission_box_extents.x = cast_point.length() * 0.5

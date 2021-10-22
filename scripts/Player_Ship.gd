@@ -1,17 +1,7 @@
 extends KinematicBody2D
 
-enum States {IDLE, SHOOT_LEFT, SHOOT_RIGHT, SHOOT_DOUBLE}
-var _state : int = States.IDLE
-var _previous_state : int = States.IDLE
-
 const MIN_ZOOM_FACTOR=Vector2(0.7,0.7)
 const MAX_ZOOM_FACTOR=Vector2(3,3)
-
-signal state_idle
-signal state_double
-signal stop_fire_left
-signal stop_fire_right
-signal stop_fire_double
 
 export (int) var speed = 150
 
@@ -24,13 +14,7 @@ export var relative_controls: bool =true
 
 var velocity = Vector2()
 
-var left_flag = false
-var right_flag = false
-var double_flag = false
-
 var camera=null
-
-
 
 func _ready():
 	#make mouse invisible and confine to window
@@ -74,13 +58,7 @@ func get_newtonian_input_fixed(delta):
 	else:
 		velocity=velocity.linear_interpolate(Vector2(0,0),friction)
 		
-	
 #get input for rotation via mouse
-
-	
-	
-	
-	
 func _unhandled_input(event: InputEvent) -> void:
 	var mouse_motion = event as InputEventMouseMotion
 	if mouse_motion:
@@ -93,10 +71,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("scroll_up") and zoom_factor >= MIN_ZOOM_FACTOR:
 		zoom_factor-=Vector2(0.1,0.1)
 		camera.set_zoom(zoom_factor)
+
 	if event is InputEventMouseButton:
 		if Input.is_action_just_released("secondary_fire") or Input.is_action_just_released("fire"):
 			Weapons.stop_fire()
-
 		if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire"):
 			Weapons.stop_fire()
 			Weapons.fire_double()
@@ -105,45 +83,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif Input.is_action_pressed("secondary_fire"):
 			Weapons.fire_right()
 
-		
-"""func fire_inputs():
-	if Input.is_action_just_released("secondary_fire"):
-		emit_signal("state_idle")
-		right_flag = false
-		if double_flag:
-			double_flag = false
-			left_flag = false
-	elif Input.is_action_just_released("fire"):
-		emit_signal("state_idle")
-		left_flag = false
-		if double_flag:
-			double_flag = false
-			right_flag = false
-	if Input.is_action_pressed("fire") and Input.is_action_pressed("secondary_fire") and double_flag == false:
-		left_flag = true
-		right_flag = true
-		double_flag = true
-		print("double")
-		emit_signal("state_idle")
-		_state = States.SHOOT_DOUBLE
-	elif Input.is_action_pressed("fire") and left_flag == false:
-		print("fire")
-		left_flag = true
-		double_flag = false
-		_state = States.SHOOT_LEFT
-	elif Input.is_action_pressed("secondary_fire") and right_flag == false:
-		right_flag = true
-		double_flag = false
-		print("secondary fire")
-		_state = States.SHOOT_RIGHT
-	else:
-		#emit_signal("state_idle")
-		_state = States.IDLE
-"""
-
-
-	
-
 func _physics_process(delta):
 	if relative_controls:
 		get_newtonian_input(delta)
@@ -151,10 +90,6 @@ func _physics_process(delta):
 		get_newtonian_input_fixed(delta)
 		
 	global_position-=move_and_slide(velocity*speed*delta)
-
-
-
-
 	
 """
 Old shooting mechanic for backup purposes
