@@ -1,10 +1,10 @@
-extends Node2D
+extends Control
 
 var opt_button=null
 #Must have Global.gd autoloaded to function
 
 func _ready():
-	opt_button=$Control/Loadout/OptionButton
+	opt_button=$Loadout/OptionButton
 	opt_button.add_item("First Weapon Loadout")
 	opt_button.add_item("Second Weapon Loadout")
 	opt_button.select(-1)
@@ -37,3 +37,7 @@ func _on_StartButton_pressed():
 		PlayerLoadout._set_default()
 		
 	Global.goto_scene("res://maps/Map01.tscn")
+
+
+func _on_OptionButton_pressed() -> void:
+	pass # Replace with function body.
