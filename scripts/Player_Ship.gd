@@ -71,7 +71,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("scroll_up") and zoom_factor >= MIN_ZOOM_FACTOR:
 		zoom_factor-=Vector2(0.1,0.1)
 		camera.set_zoom(zoom_factor)
-
+	
+	if event is InputEventKey:
+		if event.is_action_pressed("ability_a"):
+			Weapons.trigger_ability_a()
+		elif event.is_action_pressed("ability_b"):
+			Weapons.trigger_ability_b()
 	if event is InputEventMouseButton:
 		if Input.is_action_just_released("secondary_fire") or Input.is_action_just_released("fire"):
 			Weapons.stop_fire()

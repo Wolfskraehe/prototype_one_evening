@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://resources/particles/PNG (Transparent)/twirl_01.png" type="Texture" id=2]
+[ext_resource path="res://Node.gd" type="Script" id=3]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.331984, 0.676113, 1 )
+colors = PoolColorArray( 0.215686, 0.972549, 0.956863, 1, 0.109804, 0.921569, 0.368627, 1, 0.968627, 0.466667, 0.454902, 1, 0.662745, 0.717647, 0.964706, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 357.62
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.05
+color_ramp = SubResource( 2 )
+hue_variation = -0.03
+hue_variation_random = 0.47
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 74.8255
+
+[node name="PlayerShield" type="Area2D"]
+script = ExtResource( 3 )
+lifetime_length = 30.0
+
+[node name="Lifetime" type="Timer" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 9.4, 9.24 )
+amount = 3
+preprocess = 2.0
+process_material = SubResource( 3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 1.56, 1.52 )
+shape = SubResource( 4 )
+
+[connection signal="area_entered" from="." to="." method="_on_PlayerShield_area_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
