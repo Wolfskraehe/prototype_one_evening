@@ -30,8 +30,8 @@ func _ready() -> void:
 	get_tree().get_root().call_deferred("add_child", gun_left)
 	get_tree().get_root().call_deferred("add_child", ability_a_instance)
 	get_tree().get_root().call_deferred("add_child", ability_b_instance)
-	call_deferred("reparent", ability_a_instance, get_tree().get_root().get_node("Instance/Player_Ship"))
-	call_deferred("reparent", ability_b_instance, get_tree().get_root().get_node("Instance/Player_Ship"))
+#	call_deferred("reparent", ability_a_instance, get_tree().get_root().get_node("Instance/Player_Ship"))
+#	call_deferred("reparent", ability_b_instance, get_tree().get_root().get_node("Instance/Player_Ship"))
 var _left_weapon=""
 var _right_weapon=""
 var _double_weapon=""

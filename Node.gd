@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 export(float, 0, 50, 0.5) var lifetime_length
 
@@ -30,7 +30,9 @@ func _on_Lifetime_timeout() -> void:
 	ShieldParticles.emitting = false
 	
 
-
+func _physics_process(delta: float) -> void:
+	if running:
+		global_position = get_tree().get_root().get_node("Instance/Player_Ship").global_position
 
 
 func _on_PlayerShield_area_entered(area: Area2D) -> void:
