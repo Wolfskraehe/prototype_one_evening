@@ -1,6 +1,8 @@
 extends RayCast2D
 
 var is_casting := false setget set_is_casting
+var damage = 1
+var damage_type = "beam"
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -21,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 		$CastingParticlesHit.position = cast_point
 		var body = get_collider();
 		if body.is_in_group("enemy"):
-			body.destroy()
+			body.take_damage(damage, damage_type)
 
 	$Line2D.points[1] = cast_point
 	$BeamParticles.position = cast_point * 0.5

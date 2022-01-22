@@ -1,6 +1,8 @@
 extends Area2D
 
 var speed = 1000
+var damage=1
+var damage_type="kinetic"
 
 
 func shoot():
@@ -19,7 +21,7 @@ func _physics_process(delta):
 
 func _on_Projectile_body_entered(body):
 	if body.is_in_group("enemy"):
-		body.destroy()
+		body.take_damage(damage, damage_type)
 	queue_free()
 
 func _on_timeout():

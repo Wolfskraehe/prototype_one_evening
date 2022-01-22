@@ -7,6 +7,7 @@ var enemy_array=[]
 
 const enemy=preload("res://scenes/Enemy_Ship.tscn")
 
+#currently not used
 func spawn_enemy():
 	if respawn_timer<=0.0 and enemy_array.size()<=2:
 		var e=enemy.instance()

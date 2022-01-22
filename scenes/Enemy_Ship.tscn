@@ -73,3 +73,9 @@ position = Vector2( -0.707912, 4.48339 )
 scale = Vector2( 5.04424, 5.28021 )
 texture = ExtResource( 3 )
 hframes = 24
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 35, 0 )
+rotation = -1.5708
+enabled = true
+collision_mask = 2
