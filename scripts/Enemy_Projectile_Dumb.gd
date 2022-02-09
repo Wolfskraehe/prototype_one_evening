@@ -6,6 +6,9 @@ var speed = 1000
 var velocity = Vector2.ZERO
 var target=null
 
+var damage=1
+var damage_type="kinetic"
+
 func start(_transform, _target):
 	target=_target
 	global_transform = _transform
@@ -24,5 +27,6 @@ func _on_timeout():
 
 func _on_Projectile_body_entered(body):
 	if body.is_in_group("player"):
+		body.take_damage(damage, damage_type)
 		queue_free()
 

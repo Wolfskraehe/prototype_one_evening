@@ -4,6 +4,9 @@ const MIN_ZOOM_FACTOR=Vector2(0.7,0.7)
 const MAX_ZOOM_FACTOR=Vector2(3,3)
 
 export (int) var speed = 150
+export var hitpoints_structure = 5
+export var is_destroyed = false
+export var god_mode = true
 
 export var rotation_dir : float=0
 export var rotation_speed : float = 200
@@ -87,14 +90,26 @@ func _unhandled_input(event: InputEvent) -> void:
 			Weapons.fire_left()
 		elif Input.is_action_pressed("secondary_fire"):
 			Weapons.fire_right()
+			
+func take_damage(damage, type):
+	if god_mode == false:
+		hitpoints_structure -= damage
+	
+func destroy():
+	$AnimationPlayer.play("explode")
+	yield($AnimationPlayer, "animation_finished")
+	is_destroyed = true
 
 func _physics_process(delta):
-	if relative_controls:
-		get_newtonian_input(delta)
-	else:
-		get_newtonian_input_fixed(delta)
-		
-	global_position-=move_and_slide(velocity*speed*delta)
+	if is_destroyed == false:
+		if relative_controls:
+			get_newtonian_input(delta)
+		else:
+			get_newtonian_input_fixed(delta)
+			
+		global_position-=move_and_slide(velocity*speed*delta)
+		if hitpoints_structure <= 0:
+			destroy()
 	
 """
 Old shooting mechanic for backup purposes
