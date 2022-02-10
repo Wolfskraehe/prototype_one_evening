@@ -5,9 +5,10 @@ const Ability_B = preload("res://scenes/PlayerShield.tscn")
 
 #Spawns the weapon projectiles or effects
 
-const Projectile_Gun =preload("res://scenes/Projectile_Gun.tscn")
-const ProjectileRight =preload("res://scenes/Projectile_right.tscn")
-const ProjectileDouble =preload("res://scenes/Projectile_double_big.tscn")
+const Projectile_Gun = preload("res://scenes/Projectile_Gun.tscn")
+const ProjectileRight = preload("res://scenes/Projectile_right.tscn")
+const ProjectileDouble = preload("res://scenes/Projectile_double_big.tscn")
+const AutoAimGun = preload("res://scenes/Auto_Aim_Gun.tscn")
 const Laser =preload("res://scenes/Sustained_Gun.tscn")
 
 	
@@ -24,14 +25,13 @@ var fire_delay=0.0
 func _ready() -> void:
 	ability_a_instance = Ability_A.instance()
 	ability_b_instance = Ability_B.instance()
-	gun_left = Projectile_Gun.instance()
+	gun_left = AutoAimGun.instance()
 	gun_right = Laser.instance()
 	get_tree().get_root().call_deferred("add_child", gun_right)
 	get_tree().get_root().call_deferred("add_child", gun_left)
 	get_tree().get_root().call_deferred("add_child", ability_a_instance)
 	get_tree().get_root().call_deferred("add_child", ability_b_instance)
-#	call_deferred("reparent", ability_a_instance, get_tree().get_root().get_node("Instance/Player_Ship"))
-#	call_deferred("reparent", ability_b_instance, get_tree().get_root().get_node("Instance/Player_Ship"))
+
 var _left_weapon=""
 var _right_weapon=""
 var _double_weapon=""

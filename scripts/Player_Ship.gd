@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 const MIN_ZOOM_FACTOR=Vector2(0.7,0.7)
 const MAX_ZOOM_FACTOR=Vector2(3,3)
 

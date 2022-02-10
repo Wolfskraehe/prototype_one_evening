@@ -24,3 +24,18 @@ cabal.project.local~
 
 
 
+.mono/metadata/ide_messaging_meta.txt
+.mono/metadata/ide_messaging_meta.txt
+.mono/assemblies/Debug/GodotSharpEditor.pdb
+.mono/assemblies/Debug/GodotSharpEditor.dll
+.mono/assemblies/Debug/GodotSharp.xml
+.mono/assemblies/Debug/GodotSharp.pdb
+.mono/assemblies/Debug/GodotSharp.dll
+.mono/assemblies/Debug/api_hash_cache.cfg
+.mono/assemblies/Debug/api_hash_cache.cfg
+.mono/assemblies/Debug/GodotSharp.dll
+.mono/assemblies/Debug/GodotSharp.pdb
+.mono/assemblies/Debug/GodotSharp.xml
+.mono/assemblies/Debug/GodotSharpEditor.dll
+.mono/assemblies/Debug/GodotSharpEditor.pdb
+.mono/metadata/ide_messaging_meta.txt

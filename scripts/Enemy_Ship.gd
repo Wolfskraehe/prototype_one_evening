@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Enemy
+
 const Enemy_Procectile=preload("res://scenes/Enemy_Projectile.tscn")
 const Procectile=preload("res://scenes/Enemy_Projectile_Dumb.tscn")
 
