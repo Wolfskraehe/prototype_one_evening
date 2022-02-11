@@ -9,6 +9,7 @@ const Projectile_Gun = preload("res://scenes/Projectile_Gun.tscn")
 const ProjectileRight = preload("res://scenes/Projectile_right.tscn")
 const ProjectileDouble = preload("res://scenes/Projectile_double_big.tscn")
 const AutoAimGun = preload("res://scenes/Auto_Aim_Gun.tscn")
+const Arc_Thrower = preload("res://scenes/Arc_Thrower.tscn")
 const Laser =preload("res://scenes/Sustained_Gun.tscn")
 
 	
@@ -26,7 +27,7 @@ func _ready() -> void:
 	ability_a_instance = Ability_A.instance()
 	ability_b_instance = Ability_B.instance()
 	gun_left = AutoAimGun.instance()
-	gun_right = Laser.instance()
+	gun_right = Arc_Thrower.instance()
 	get_tree().get_root().call_deferred("add_child", gun_right)
 	get_tree().get_root().call_deferred("add_child", gun_left)
 	get_tree().get_root().call_deferred("add_child", ability_a_instance)
