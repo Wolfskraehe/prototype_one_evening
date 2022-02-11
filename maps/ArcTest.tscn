@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/Dynamic Space Background FREE/Nebula Red.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Arc_Factory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Player_Ship.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/TestBodyArc.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/Camera2D.gd" type="Script" id=5]
+
+[node name="Instance" type="Node2D"]
+
+[node name="Player_Ship" parent="." instance=ExtResource( 3 )]
+position = Vector2( 528, 307 )
+mouse_sensitivity = 0.15
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 514.318, 298.431 )
+current = true
+zoom = Vector2( 2, 2 )
+smoothing_enabled = true
+smoothing_speed = 2.0
+script = ExtResource( 5 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.01, 0.01 )
+motion_mirroring = Vector2( 8136, 8136 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1920.31, 1079.84 )
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+visible = false
+position = Vector2( 4624, 307 )
+z_index = -1
+texture = ExtResource( 1 )
+
+[node name="Arc_Factory" parent="." instance=ExtResource( 2 )]
+position = Vector2( 15.0403, 0 )
+scale = Vector2( 2.48828, 1 )
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 427.912, 117.069 )
+
+[node name="StaticBody2D2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 132.746, 283.381 )
+
+[node name="StaticBody2D3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 299.058, 60.1335 )
+
+[node name="StaticBody2D4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 363.485, 141.042 )
+rotation = -3.14446
+
+[node name="StaticBody2D5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 281.078, 139.544 )
+script = null
+
+[node name="StaticBody2D6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 291.567, 244.425 )
+
+[node name="StaticBody2D7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 348.502, 19.6791 )
+
+[node name="StaticBody2D8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 351.499, 88.6012 )
+
+[node name="StaticBody2D9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 415.926, 63.13 )
+
+[node name="StaticBody2D10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 414.428, 19.6791 )

@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/Player_Ship.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Test",
+"language": "GDScript",
+"path": "res://scripts/TestBodyArc.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
-"Player": ""
+"Player": "",
+"Test": ""
 }
 
 [application]
@@ -38,8 +44,8 @@ Weapons="*res://scripts/Weapons.gd"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
+window/size/width=640
+window/size/height=480
 
 [global]
 

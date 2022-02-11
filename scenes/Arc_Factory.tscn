@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Arc_Factory.gd" type="Script" id=1]
+
+[node name="Arc_Factory" type="Line2D"]
+points = PoolVector2Array( 0, 0, 100, 0 )
+width = 5.0
+script = ExtResource( 1 )
